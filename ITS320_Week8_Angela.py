@@ -71,7 +71,7 @@ class Course:
         self.__description = description
         self.__credits = credits
         self.__capacity = capacity
-        self.courses = []  # list to store registered courses    
+        self.__students = []  # list to store students registered for this course  
 
     # Define getter and setter methods to provide controlled access to the private course attributes.
     # Define getter method for retrieving the course_ID attribute
