@@ -4,17 +4,20 @@
 # Create a list of established user objects.
 users = [
     {"username": "admin", "password": "password", "role": "admin"},
-    {"username": "student1", "password": "password", "role": "student"},
-    {"username": "student2", "password": "password", "role": "student"}
+    {"username": "student1", "password": "password1", "role": "student"},
+    {"username": "student2", "password": "password2", "role": "student"}
 ]
 
 class User:
     # username
     # password
+    pass
 
 class Student(User):
     # student-specific info
+    pass
 
 class Admin(User):
     # admin-specific info
+    pass
 
