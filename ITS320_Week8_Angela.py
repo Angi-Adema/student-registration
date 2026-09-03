@@ -5,9 +5,22 @@
 class User:
     # Define a constructor to initialize the user object with username, password, and role
     def __init__(self, username, password, role):
-        self.username = username
-        self.password = password
-        self.role = role
+        self.__username = username
+        self.__password = password
+        self.__role = role
+
+    # Use only getter methods to access the private username, password, and role attributes.
+    # Define getter method for retrieving the username attribute
+    def get_username(self):
+        return self.__username
+
+    # Define getter method for retrieving the password attribute
+    def get_password(self):
+        return self.__password
+
+    # Define getter method for retrieving the role attribute
+    def get_role(self):
+        return self.__role
 
 # Create a class to represent a student that inherits from the User class.
 class Student(User):
@@ -15,7 +28,7 @@ class Student(User):
     def __init__(self, username, password, role):
         # Call the constructor of the parent class (User) to initialize the username, password, and role attributes
         super().__init__(username, password, role)
-        self.courses = []  # list to store registered courses
+        self.__courses = []  # list to store registered courses
 
 # Create a class to represent an admin that inherits from the User class.
 class Admin(User):
@@ -43,10 +56,58 @@ def login():
         for user in users:
 
             # Conditional to check if both the username and password match the stored user credentials.
-            if user.username == username and user.password == password:
+            if user.get_username() == username and user.get_password() == password:
                 return user  # Return the user object if credentials match
             
         # Print an error message if credentials do not match
         print("Invalid username or password. Please try again.")
+
+# Create a class to represent a course with attributes for course_ID, title, description, credits, and capacity.
+class Course:
+    # Define a constructor to initialize the course object with course_ID, title, description, credits, and capacity
+    def __init__(self, course_ID, title, description, credits, capacity):
+        self.__course_ID = course_ID
+        self.__title = title
+        self.__description = description
+        self.__credits = credits
+        self.__capacity = capacity
+        self.courses = []  # list to store registered courses    
+
+    # Define getter and setter methods to provide controlled access to the private course attributes.
+    # Define getter method for retrieving the course_ID attribute
+    def get_course_ID(self):
+        return self.__course_ID
+
+    # Define getter method for retrieving the title attribute
+    def get_title(self):
+        return self.__title
+
+    # Define setter method for updating the title attribute
+    def set_title(self, title):
+        self.__title = title
+
+    # Define getter method for retrieving the description attribute
+    def get_description(self):
+        return self.__description
+
+    # Define setter method for updating the description attribute
+    def set_description(self, description):
+        self.__description = description
+
+    # Define getter method for retrieving the credits attribute
+    def get_credits(self):
+        return self.__credits
+
+    # Define setter method for updating the credits attribute
+    def set_credits(self, credits):
+        self.__credits = credits
+
+    # Define getter method for retrieving the capacity attribute
+    def get_capacity(self):
+        return self.__capacity
+
+    # Define setter method for updating the capacity attribute
+    def set_capacity(self, capacity):
+        self.__capacity = capacity
 
 
