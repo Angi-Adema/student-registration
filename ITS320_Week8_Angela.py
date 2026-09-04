@@ -30,6 +30,10 @@ class Student(User):
         super().__init__(username, password, role)
         self.__courses = []  # list to store registered courses
 
+    # Define a getter method for retrieving the list of registered courses
+    def get_courses(self):
+        return self.__courses
+
 # Create a class to represent an admin that inherits from the User class.
 class Admin(User):
     pass
@@ -47,10 +51,10 @@ def login():
     while True:
 
         # Prompt the user to enter their username.
-        username = input("Please enter your username: ")
+        username = input("Please enter your username: ").strip()
 
         # Prompt the user to enter their password.
-        password = input("Please enter your password: ")
+        password = input("Please enter your password: ").strip()
 
         # Loop through the list of users to see if a match exists for the provided username and password.
         for user in users:
@@ -109,5 +113,9 @@ class Course:
     # Define setter method for updating the capacity attribute
     def set_capacity(self, capacity):
         self.__capacity = capacity
+
+    # Define getter method for retrieving the list of students registered for this course
+    def get_students(self):
+        return self.__students
 
 
