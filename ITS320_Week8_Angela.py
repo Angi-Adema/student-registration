@@ -278,6 +278,106 @@ course_list = [
 # Loop through the course list and add each course to the registration system
 for course in course_list:
     registration_system.add_course(course)
+
+# Create a function to handle the admin menu options
+def admin_menu(admin):
+
+    # Implement a while True loop to reprompt the user until they exit the system
+    while True:
+
+        # Call display_menu to display the admin menu options
+        admin.display_menu()
+
+        # Prompt the admin to enter their selection removing any leading or trailing whitespace
+        selection = input("Please enter your selection: ").strip()
+
+        # Implement the admin menu options based on the selection
+        # Funtionality to add a course
+        if selection == "1":
+
+            # Use a while True loop to reprompt for correct input
+            while True:
+
+                # Prompt the admin to enter the course ID ensuring it is not empty and removing any leading or trailing whitespace
+                course_ID = input("Enter course ID: ").strip()
+
+                # Check if the course ID is not empty
+                if course_ID != "":
+                    break   # Exit the loop if the course ID is not empty
+
+                # Print an error message if the course ID is empty
+                print("Course ID cannot be empty.")
+
+            # Input validation is the same as above for course name and description
+            while True:
+                course_name = input("Enter course name: ").strip()
+                if course_name != "":
+                    break
+                print("Course name cannot be empty.")
+
+            while True:
+                course_description = input("Enter course description: ").strip()
+                if course_description != "":
+                    break
+                print("Course description cannot be empty.")
+
+            # Implement a loop to repeatedly prompt the admin for course credits and capacity until valid values are entered
+            while True:
+
+                # Validate user input using a try/except statement
+                try:
+                    course_credits = int(input("Enter course credits: ").strip())
+                    course_capacity = int(input("Enter course capacity: ").strip())
+
+                    # Conditional to ensure values entered are positive
+                    if course_credits > 0 or course_capacity > 0:
+                        break   # Exit the loop if invalid values are entered
+
+                    # Print an error message if the values are not positive
+                    print("Credits and capacity must be positive numbers.")
+                
+                # Handle the case where the user enters non-numeric values for credits or capacity
+                except ValueError:
+                    print("Invalid input. Please enter a whole, positive number for credits and capacity.")
+                    continue
+
+            # Create a new Course object with the entered details
+            new_course = Course(course_ID, course_name, course_description, course_credits, course_capacity)
+
+            # Add the new course to the registration system
+            registration_system.add_course(new_course)
+
+            # Notify the admin that the course has been added successfully
+            print(f"Course {course_name} added successfully.")
+
+        elif selection == "2":
+            # Add your code to handle option 2
+            pass
+        elif selection == "3":
+            # Add your code to handle option 3
+            pass
+        elif selection == "4":
+            # Add your code to handle option 4
+            pass
+        elif selection == "5":
+            # Add your code to handle option 5
+            pass
+        elif selection == "6":
+            # Add your code to handle option 6
+            pass
+        elif selection == "7":
+            # Add your code to handle option 7
+            pass
+        elif selection == "8":
+            # Add your code to handle option 8 (View All Courses)
+            all_courses = registration_system.get_all_courses()
+            for course in all_courses:
+                print(course)
+        elif selection == "9":
+            # Logout option
+            break
+        else:
+            print("Invalid selection. Please try again.")
     
     
     
