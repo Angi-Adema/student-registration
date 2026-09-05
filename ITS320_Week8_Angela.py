@@ -1,18 +1,18 @@
 # Create a Student Course Registration system where students and admin can log in to 
 # complete tasks such as registering for a course or for the admin, print a report or add a new course.
 
-# Create a class to represent a user with attributes for username, password, and role (student or admin).
+# Create a class to represent a user with attributes for user_ID, password, and role (student or admin).
 class User:
-    # Define a constructor to initialize the user object with username, password, and role
-    def __init__(self, username, password, role):
-        self.__username = username
+    # Define a constructor to initialize the user object with user_ID, password, and role
+    def __init__(self, user_ID, password, role):
+        self.__user_ID = user_ID
         self.__password = password
         self.__role = role
 
-    # Use only getter methods to access the private username, password, and role attributes.
-    # Define getter method for retrieving the username attribute
-    def get_username(self):
-        return self.__username
+    # Use only getter methods to access the private user_ID, password, and role attributes.
+    # Define getter method for retrieving the user_ID attribute
+    def get_user_ID(self):
+        return self.__user_ID
 
     # Define getter method for retrieving the password attribute
     def get_password(self):
@@ -24,10 +24,10 @@ class User:
 
 # Create a class to represent a student that inherits from the User class.
 class Student(User):
-    # Define a constructor with username, password, role
-    def __init__(self, username, password, role):
-        # Call the constructor of the parent class (User) to initialize the username, password, and role attributes
-        super().__init__(username, password, role)
+    # Define a constructor with user_ID, password, role
+    def __init__(self, user_ID, password, role):
+        # Call the constructor of the parent class (User) to initialize the user_ID, password, and role attributes
+        super().__init__(user_ID, password, role)
         self.__courses = []  # list to store registered courses
 
     # Define a getter method for retrieving the list of registered courses
@@ -57,26 +57,26 @@ users = [
     Student("student2", "password2", "student")
 ]
 
-# Create a method to handle authentication for users based on their username and password.
+# Create a method to handle authentication for users based on their user_ID and password.
 def login():
     # Create a while True loop allowing the user to retry their credentials until they are correct.
     while True:
 
-        # Prompt the user to enter their username.
-        username = input("Please enter your username: ").strip()
+        # Prompt the user to enter their user_ID.
+        user_ID = input("Please enter your user ID: ").strip()
 
         # Prompt the user to enter their password.
         password = input("Please enter your password: ").strip()
 
-        # Loop through the list of users to see if a match exists for the provided username and password.
+        # Loop through the list of users to see if a match exists for the provided user_ID and password.
         for user in users:
 
-            # Conditional to check if both the username and password match the stored user credentials.
-            if user.get_username() == username and user.get_password() == password:
+            # Conditional to check if both the user_ID and password match the stored user credentials.
+            if user.get_user_ID() == user_ID and user.get_password() == password:
                 return user  # Return the user object if credentials match
             
         # Print an error message if credentials do not match
-        print("Invalid username or password. Please try again.")
+        print("Invalid user ID or password. Please try again.")
 
 # Create a class to represent a course with attributes for course_ID, title, description, credits, and capacity.
 class Course:
@@ -221,6 +221,21 @@ class RegistrationSystem:
     # Create a method to get all courses in the registration system
     def get_all_courses(self):
         return self.__courses  # Return the list of all courses in the registration system
+
+    # Create a method to get all student IDs and passwords
+    def get_student_credentials(self):
+        # Create an empty list to store student credentials
+        credentials = []
+
+        # Loop through the list of users to collect student IDs and passwords
+        for user in users:
+
+            # Conditional to check if the role is a student
+            if user.get_role().strip().lower() == "student":
+                credentials.append((user.get_user_ID(), user.get_password()))  # Add the student's ID and password to the credentials list
+        return credentials  # Return the list of student credentials
+    
+    
     
     
     
