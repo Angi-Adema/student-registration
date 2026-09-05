@@ -153,6 +153,38 @@ class RegistrationSystem:
                 student.add_course(course)   # Add the course to the student's list of courses
                 return True   # Return True to indicate successful registration
         return False  # Return False to indicate registration failed
+
+    # Define a method to remove a course from the registration system
+    def remove_course(self, course):
+        # Check if the course exists in the registration system before attempting removal
+        if course in self.__courses:
+            # Remove the course from the registration system's list of courses
+            self.__courses.remove(course)
+            return True   # Return True to indicate successful removal
+        return False  # Return False to indicate removal failed because the course was not found
+    
+    # Define a method to search for a course by its name or ID
+    def search_course(self, search_term):
+        # Ensure the search_term removes leading/trailing whitespace and is lowercase
+        search_term = search_term.strip().lower()
+        # Iterate through the list of courses to find a match by removing leading/trailing whitespace from the title or ID and converting them to lowercase
+        for course in self.__courses:
+            if course.get_title().strip().lower() == search_term or course.get_course_ID().strip().lower() == search_term:
+                return course   # Return the course if a match is found
+        return None  # Return None if no matching course is found
+
+    # Define a method to update a course
+    def update_course(self, course, title, description, credits, capacity):
+        # Check if the course exists in the registration system
+        if course in self.__courses:
+            # Update the course details
+            course.set_title(title)
+            course.set_description(description)
+            course.set_credits(credits)
+            course.set_capacity(capacity)
+            return True   # Return True to indicate successful update
+        return False  # Return False to indicate update failed because the course was not found
+    
     
 
 
