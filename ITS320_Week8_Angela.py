@@ -302,26 +302,40 @@ def admin_menu(admin):
                 course_ID = input("Enter course ID: ").strip()
 
                 # Check if the course ID is not empty
-                if course_ID != "":
-                    break   # Exit the loop if the course ID is not empty
+                if course_ID == "":
+                    print("Course ID cannot be empty.")   # Notify the admin that the course ID cannot be empty
+                    continue  # Reprompt the admin for the course ID if it is empty
 
-                # Print an error message if the course ID is empty
-                print("Course ID cannot be empty.")
+                # Conditional to check if the course ID already exists
+                if registration_system.search_course(course_ID) is not None:
+                    print("Course ID already exists.")   # Notify the admin that the course ID already exists
+                    continue  # Reprompt the admin for the course ID if it already exists
 
-            # Input validation is the same as above for course name and description
+                break  # Exit the loop if the course ID is valid and does not already exist
+
+            # Reprompt for course name until valid input is provided
             while True:
+
+                # Prompt the admin to enter the course name ensuring it is not empty and removing any leading or trailing whitespace
                 course_name = input("Enter course name: ").strip()
+
+                # Check if the course name is not empty
                 if course_name != "":
-                    break
-                print("Course name cannot be empty.")
+                    break   # Exit the loop if the course name is not empty
+                print("Course name cannot be empty.")   # Notify the admin that the course name cannot be empty
 
+            # Reprompt for course description until valid input is provided
             while True:
-                course_description = input("Enter course description: ").strip()
-                if course_description != "":
-                    break
-                print("Course description cannot be empty.")
 
-            # Implement a loop to repeatedly prompt the admin for course credits and capacity until valid values are entered
+                # Prompt the admin to enter the course description ensuring it is not empty and removing any leading or trailing whitespace
+                course_description = input("Enter course description: ").strip()
+
+                # Check if the course description is not empty
+                if course_description != "":
+                    break   # Exit the loop if the course description is not empty
+                print("Course description cannot be empty.")   # Notify the admin that the course description cannot be empty
+
+            # Reprompt for course credits and capacity until valid input is provided
             while True:
 
                 # Validate user input using a try/except statement
@@ -330,8 +344,8 @@ def admin_menu(admin):
                     course_capacity = int(input("Enter course capacity: ").strip())
 
                     # Conditional to ensure values entered are positive
-                    if course_credits > 0 or course_capacity > 0:
-                        break   # Exit the loop if invalid values are entered
+                    if course_credits > 0 and course_capacity > 0:
+                        break   # Exit the loop if valid values are entered
 
                     # Print an error message if the values are not positive
                     print("Credits and capacity must be positive numbers.")
@@ -339,7 +353,6 @@ def admin_menu(admin):
                 # Handle the case where the user enters non-numeric values for credits or capacity
                 except ValueError:
                     print("Invalid input. Please enter a whole, positive number for credits and capacity.")
-                    continue
 
             # Create a new Course object with the entered details
             new_course = Course(course_ID, course_name, course_description, course_credits, course_capacity)
