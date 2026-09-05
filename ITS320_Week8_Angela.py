@@ -152,10 +152,6 @@ class RegistrationSystem:
     def __init__(self):
         self.__courses = []  # list to store all courses
 
-    # Define getter method for retrieving the list of courses
-    def get_courses(self):
-        return self.__courses
-
     # Define method to add a course to the registration system
     def add_course(self, course):
         self.__courses.append(course)
@@ -210,6 +206,23 @@ class RegistrationSystem:
             course.set_capacity(capacity)
             return True   # Return True to indicate successful update
         return False  # Return False to indicate update failed because the course was not found
+
+    # Create a method to get all students registered in a course
+    def get_students_in_course(self, course):
+        # Check if the course exists in the registration system
+        if course in self.__courses:
+            return course.get_students()  # Return the list of students registered in the course
+        return []  # Return an empty list if the course is not found
+
+    # Create a method to get all courses a student is registered in
+    def get_courses_for_student(self, student):
+        return student.get_courses()  # Return the list of courses the student is registered in
+
+    # Create a method to get all courses in the registration system
+    def get_all_courses(self):
+        return self.__courses  # Return the list of all courses in the registration system
+    
+    
     
     
 
