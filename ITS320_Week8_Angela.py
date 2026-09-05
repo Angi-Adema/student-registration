@@ -210,9 +210,14 @@ class RegistrationSystem:
     def remove_course(self, course):
         # Check if the course exists in the registration system before attempting removal
         if course in self.__courses:
+            # Remove the course from each enrolled student's course list
+            for student in course.get_students():
+                student.drop_course(course)  # Remove the course from the student's list of courses
+
             # Remove the course from the registration system's list of courses
             self.__courses.remove(course)
-            return True   # Return True to indicate successful removal
+
+            return True  # Return True to indicate successful removal
         return False  # Return False to indicate removal failed because the course was not found
     
     # Define a method to search for a course by its name or ID
