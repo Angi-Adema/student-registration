@@ -292,7 +292,7 @@ def admin_menu(admin):
         selection = input("Please enter your selection: ").strip()
 
         # Implement the admin menu options based on the selection
-        # Funtionality to add a course
+        # Functionality to add a course
         if selection == "1":
 
             # Use a while True loop to reprompt for correct input
