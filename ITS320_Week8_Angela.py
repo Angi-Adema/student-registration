@@ -138,6 +138,14 @@ class Course:
             return True   # Return True to indicate successful registration
         return False  # Return False to indicate registration failed due to either the student already being registered or the course being at capacity
 
+    # Define a method for dropping a student from a course
+    def remove_student(self, student):
+        # Check if the student is registered for the course before attempting removal
+        if student in self.__students:
+            self.__students.remove(student)  # Remove the student from the course's student list
+            return True  # Return True to indicate successful removal
+        return False  # Return False to indicate removal failed because the student was not found
+
 # Define a class that handles the registration system
 class RegistrationSystem:
     # Define a constructor to initialize the registration system with an empty list of courses
