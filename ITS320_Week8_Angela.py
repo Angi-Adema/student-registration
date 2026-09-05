@@ -38,6 +38,14 @@ class Student(User):
     def add_course(self, course):
         self.__courses.append(course)
 
+    # Define a method for dropping a course from the student's list of registered courses
+    def drop_course(self, course):
+        # Check if the course exists in the student's list of registered courses before attempting to remove it
+        if course in self.__courses:
+            self.__courses.remove(course)  # Remove the course from the student's list of registered courses
+            return True  # Return True to indicate the course was successfully dropped
+        return False  # Return False if the course was not found in the student's list of registered courses
+
 # Create a class to represent an admin that inherits from the User class.
 class Admin(User):
     pass
