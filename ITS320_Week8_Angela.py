@@ -65,7 +65,14 @@ class Student(User):
 
 # Create a class to represent an admin that inherits from the User class
 class Admin(User):
-    pass
+    # Define a method to display the admin's menu options
+    def display_menu(self):
+        print("      Admin Menu      ")
+        print("------------------------------")
+        print("1. View all courses")
+        print("2. Add a course")
+        print("3. Remove a course")
+        print("4. Logout")
 
 # Create a list of established user objects
 users = [
