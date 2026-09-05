@@ -1,8 +1,11 @@
 # Create a Student Course Registration system where students and admin can log in to 
 # complete tasks such as registering for a course or for the admin, print a report or add a new course.
 
-# Create a class to represent a user with attributes for user_ID, password, and role (student or admin).
-class User:
+# Import the ABC and abstractmethod modules to create abstract base classes and enforce method implementation in derived classes
+from abc import ABC, abstractmethod
+
+# Create a class to represent a user with attributes for user_ID, password, and role (student or admin)
+class User(ABC):
     # Define a constructor to initialize the user object with user_ID, password, and role
     def __init__(self, user_ID, password, role):
         self.__user_ID = user_ID
@@ -22,7 +25,12 @@ class User:
     def get_role(self):
         return self.__role
 
-# Create a class to represent a student that inherits from the User class.
+    # Define an abstract method to display the menu for the user based on their role
+    @abstractmethod
+    def display_menu(self):
+        pass
+
+# Create a class to represent a student that inherits from the User class
 class Student(User):
     # Define a constructor with user_ID, password, role
     def __init__(self, user_ID, password, role):
@@ -46,39 +54,48 @@ class Student(User):
             return True  # Return True to indicate the course was successfully dropped
         return False  # Return False if the course was not found in the student's list of registered courses
 
-# Create a class to represent an admin that inherits from the User class.
+    # Create a method to display the student's menu options
+    def display_menu(self):
+        print("      Student Menu      ")
+        print("------------------------------")
+        print("1. View registered courses")
+        print("2. Add a course")
+        print("3. Drop a course")
+        print("4. Logout")
+
+# Create a class to represent an admin that inherits from the User class
 class Admin(User):
     pass
 
-# Create a list of established user objects.
+# Create a list of established user objects
 users = [
     Admin("admin", "password", "admin"),
     Student("student1", "password1", "student"),
     Student("student2", "password2", "student")
 ]
 
-# Create a method to handle authentication for users based on their user_ID and password.
+# Create a method to handle authentication for users based on their user_ID and password
 def login():
-    # Create a while True loop allowing the user to retry their credentials until they are correct.
+    # Create a while True loop allowing the user to retry their credentials until they are correct
     while True:
 
-        # Prompt the user to enter their user_ID.
+        # Prompt the user to enter their user_ID
         user_ID = input("Please enter your user ID: ").strip()
 
-        # Prompt the user to enter their password.
-        password = input("Please enter your password: ").strip()
+        # Prompt the user to enter their password
+        password = input("Please enter your password: ")
 
-        # Loop through the list of users to see if a match exists for the provided user_ID and password.
+        # Loop through the list of users to see if a match exists for the provided user_ID and password
         for user in users:
 
-            # Conditional to check if both the user_ID and password match the stored user credentials.
+            # Conditional to check if both the user_ID and password match the stored user credentials
             if user.get_user_ID() == user_ID and user.get_password() == password:
                 return user  # Return the user object if credentials match
             
         # Print an error message if credentials do not match
         print("Invalid user ID or password. Please try again.")
 
-# Create a class to represent a course with attributes for course_ID, title, description, credits, and capacity.
+# Create a class to represent a course with attributes for course_ID, title, description, credits, and capacity
 class Course:
     # Define a constructor to initialize the course object with course_ID, title, description, credits, and capacity
     def __init__(self, course_ID, title, description, credits, capacity):
@@ -89,7 +106,7 @@ class Course:
         self.__capacity = capacity
         self.__students = []  # list to store students registered for this course  
 
-    # Define getter and setter methods to provide controlled access to the private course attributes.
+    # Define getter and setter methods to provide controlled access to the private course attributes
     # Define getter method for retrieving the course_ID attribute
     def get_course_ID(self):
         return self.__course_ID
@@ -234,6 +251,20 @@ class RegistrationSystem:
             if user.get_role().strip().lower() == "student":
                 credentials.append((user.get_user_ID(), user.get_password()))  # Add the student's ID and password to the credentials list
         return credentials  # Return the list of student credentials
+
+# Initialize the registration system
+registration_system = RegistrationSystem()
+
+# Create a list of courses to add to the registration system
+course_list = [
+    Course("ITS320", "Basic Programming", "Introduction to Python programming", 3, 25),
+    Course("ITS321", "Advanced Programming", "Advanced topics in Python programming", 3, 25),
+    Course("ITS322", "Data Structures", "Introduction to data structures in Python", 3, 25),
+]
+
+# Loop through the course list and add each course to the registration system
+for course in course_list:
+    registration_system.add_course(course)
     
     
     
