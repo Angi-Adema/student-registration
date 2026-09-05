@@ -34,6 +34,10 @@ class Student(User):
     def get_courses(self):
         return self.__courses
 
+    # Define a method to handle adding a course to the student's list of registered courses
+    def add_course(self, course):
+        self.__courses.append(course)
+
 # Create a class to represent an admin that inherits from the User class.
 class Admin(User):
     pass
@@ -117,5 +121,38 @@ class Course:
     # Define getter method for retrieving the list of students registered for this course
     def get_students(self):
         return self.__students
+
+    # Define a method receiving a student object and appending it to the list of students for this course
+    def add_student(self, student):
+        # Check if the student is already registered for the course and if the course has available capacity
+        if student not in self.__students and len(self.__students) < self.__capacity:
+            self.__students.append(student)     # Add the student to the course's student list
+            return True   # Return True to indicate successful registration
+        return False  # Return False to indicate registration failed due to either the student already being registered or the course being at capacity
+
+# Define a class that handles the registration system
+class RegistrationSystem:
+    # Define a constructor to initialize the registration system with an empty list of courses
+    def __init__(self):
+        self.__courses = []  # list to store all courses
+
+    # Define getter method for retrieving the list of courses
+    def get_courses(self):
+        return self.__courses
+
+    # Define method to add a course to the registration system
+    def add_course(self, course):
+        self.__courses.append(course)
+
+    # Define method to register a student for a course
+    def register_student(self, course, student):
+        # Check if the course exists in the registration system
+        if course in self.__courses:
+            # Attempt to add the student to the course
+            if course.add_student(student):
+                student.add_course(course)   # Add the course to the student's list of courses
+                return True   # Return True to indicate successful registration
+        return False  # Return False to indicate registration failed
+    
 
 
