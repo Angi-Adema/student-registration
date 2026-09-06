@@ -794,17 +794,62 @@ def student_menu(student):
 
             # Print a closing line after listing all courses
             print("=" * 55)
-            
+
+        # Logic to print a report showing all courses available in the registration system
         elif selection == "4":
-            # View my courses
-            pass  # Replace with actual implementation
+            # Retrieve all courses from the registration system
+            all_courses = registration_system.get_all_courses()
+
+            # Print formatted all courses report
+            print("\n" + "=" * 55)
+            print("                ALL COURSES REPORT")
+            print("=" * 55)
+
+            # Check if there are no courses in the registration system
+            if len(all_courses) == 0:
+                print("No courses are currently available.")  # Notify the user that there are no courses available in the system
+            else:
+                # Loop through each course and display its details
+                for course in all_courses:
+
+                    # Determine whether the course is full
+                    if len(course.get_students()) >= course.get_capacity():
+                        status = "Full"
+                    else:
+                        status = "Not Full"
+
+                    # Print the course information
+                    print(f"Course ID: {course.get_course_ID()}")
+                    print(f"Course Title: {course.get_title()}")
+                    print(f"Description: {course.get_description()}")
+                    print(f"Credits: {course.get_credits()}")
+                    print(f"Capacity: {course.get_capacity()}")
+                    print(f"Current Enrollment: {len(course.get_students())}")
+                    print(f"Status: {status}")
+                    print("-" * 55)
+
+            # Print a closing line after displaying all courses
+            print("=" * 55)
+
+        # Logic to handle student logout
         elif selection == "5":
-            # Logout
+            # Display logging out message
             print("Logging out... Goodbye!")
             break  # Exit the student menu loop
         else:
             # Handle invalid menu selection
             print("Invalid selection. Please try again.")
+
+# Main program loop
+while True:
+    # Prompt the user to log in
+    current_user = login()
+
+    # Direct the user to the appropriate menu based on their role
+    if current_user.get_role().strip().lower() == "admin":
+        admin_menu(current_user)
+    else:
+        student_menu(current_user)
     
     
     
