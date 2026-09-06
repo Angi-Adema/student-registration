@@ -466,10 +466,43 @@ def admin_menu(admin):
                     print("Failed to update the course.")
                 break   # Exit the loop after updating the course
 
-
+        # Search for a course
         elif selection == "4":
-            # Add your code to handle option 4
-            pass
+            # Reprompt the admin to enter the course ID or title to search for
+            while True:
+                # Search using user input term
+                search_term = input("Enter the course ID or course title to search for: ").strip()
+
+                # Conditional to ensure input is not empty
+                if search_term == "":
+                    print("Course ID or title cannot be empty.")
+                    continue   # Reprompt the admin for input if the search term is empty
+
+                # Search for the course using the provided search term
+                course = registration_system.search_course(search_term)
+
+                # Handle if the course is not found
+                if course is None:
+                    print("Course not found. Please try again.")
+                    continue   # Reprompt the admin for input if the course is not found
+
+                # Display the found course details
+                print(f"Course ID: {course.get_course_ID()}")
+                print(f"Course Title: {course.get_title()}")
+                print(f"Course Description: {course.get_description()}")
+                print(f"Course Credits: {course.get_credits()}")
+                print(f"Course Capacity: {course.get_capacity()}")
+                print(f"Enrolled Students: {len(course.get_students())}")
+
+                # Logic to handle if the course is full
+                if len(course.get_students()) >= course.get_capacity():
+                    status = "Full"
+                else:
+                    status = "Not Full"
+                print(f"Course Status: {status}")   # Display whether the course is full or not
+
+                break   # Exit the loop after displaying the course details
+            
         elif selection == "5":
             # Add your code to handle option 5
             pass
