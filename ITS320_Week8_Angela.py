@@ -358,11 +358,11 @@ def admin_menu(admin):
                         break   # Exit the loop if valid values are entered
 
                     # Print an error message if the values are not positive
-                    print("\nCredits and capacity must be positive numbers.")
+                    print("\nCredits must be between 1 and 3, and capacity must be between 1 and 100.")
                 
                 # Handle the case where the user enters non-numeric values for credits or capacity
                 except ValueError:
-                    print("\nInvalid input. Please enter a whole, positive number for credits and capacity.")
+                    print("\nInvalid input. Please enter a positive number between 1 and 3 for credits and between 1 and 100 for capacity.")
 
             # Create a new Course object with the entered details
             new_course = Course(course_ID, course_name, course_description, course_credits, course_capacity)
@@ -453,7 +453,7 @@ def admin_menu(admin):
                         new_capacity = int(input("\nEnter the new capacity for the course: ").strip())
 
                         # Conditional to validate user input is within the correct range and value 
-                        if 1 <= course_credits <= 3 and 1 <= course_capacity <= 100:
+                        if 1 <= new_credits <= 3 and 1 <= new_capacity <= 100:
                             # Notify the admin that the entered credits and capacity are not valid
                             print("\nCredits and capacity must be positive numbers.")  
                             continue   # Reprompt the admin for input if the credits or capacity are not valid
