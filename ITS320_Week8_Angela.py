@@ -626,7 +626,7 @@ def admin_menu(admin):
             print("           STUDENT CREDENTIAL REPORT")
             print("=" * 55)
 
-            # Check if there are no students credentials and display a message indicating this
+            # Check if there are no students credentials and display a message if there are none
             if len(credentials) == 0:
                 print("No student credentials found.")
             else:
