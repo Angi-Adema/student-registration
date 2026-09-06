@@ -850,14 +850,36 @@ def student_menu(student):
             # Handle invalid menu selection
             print("\nInvalid selection. Please try again.")
 
-# Main program
-# Prompt the user to log in
-current_user = login()
+# Main program loop
+# Display the main menu and handle user selection
+while True:
+    print("\n1. Login")   # Prompt the user to log in
+    print("2. Exit Program")   # Prompt the user to exit the program
 
-# Direct the user to the appropriate menu based on their role
-if current_user.get_role().strip().lower() == "admin":
-    admin_menu(current_user)
-else:
-    student_menu(current_user)
+    # Get the user's menu selection
+    selection = input("\nPlease enter your selection (1-2): ").strip()
+
+    # Validate user input
+    if selection == "":
+        print("\nSelection cannot be empty. Please try again.")  # Inform the user that the selection cannot be empty
+        continue   # Skip the rest of the loop and prompt the user again
+
+    # Process the user's menu selection
+    if selection == "1":
+        # Call the login function to authenticate the user
+        current_user = login()
+
+        # Check if the login was successful
+        if current_user.get_role().strip().lower() == "admin":
+            admin_menu(current_user)  # Direct the admin user to the admin menu
+        else:
+            student_menu(current_user)  # Direct the student to the student menu
+
+    # Handle exit program selection
+    elif selection == "2":
+        print("\nExiting program... Goodbye!")   # Display exit message and terminate the program
+        break   # Exit the main program loop
+    else:
+        print("\nInvalid selection. Please try again.")   # Handle invalid main menu selection
 
 
