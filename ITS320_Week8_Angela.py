@@ -502,10 +502,56 @@ def admin_menu(admin):
                 print(f"Course Status: {status}")   # Display whether the course is full or not
 
                 break   # Exit the loop after displaying the course details
-            
+
+        # Selection to handle viewing students who are enrolled in a course
         elif selection == "5":
-            # Add your code to handle option 5
-            pass
+            # Reprompt the admin to enter the course ID or title to search for students enrolled in that course
+            while True:
+                # Search using admin input to find the course
+                search_term = input("Enter the course ID or course title to search for: ").strip()
+
+                # Conditional to ensure input is not empty
+                if search_term == "":
+                    print("Course ID or title cannot be empty.")
+                    continue   # Reprompt the admin for input if the search term is empty
+
+                # Search for the course using the provided search term
+                course = registration_system.search_course(search_term)
+
+                # Handle if the course is not found
+                if course is None:
+                    print("Course not found. Please try again.")
+                    continue   # Reprompt the admin for input if the course is not found
+
+                # Display the list of students enrolled in the course
+                students = registration_system.get_students_in_course(course)
+
+                # Print formatted report showing the list of students enrolled in a course
+                print("\n" + "=" * 55)
+                print("           COURSE ENROLLMENT REPORT")
+                print("=" * 55)
+                print(f"Course ID: {course.get_course_ID()}")
+                print(f"Course Title: {course.get_title()}")
+                print(f"Description: {course.get_description()}")
+                print(f"Credits: {course.get_credits()}")
+                print(f"Capacity: {course.get_capacity()}")
+                print(f"Current Enrollment: {len(students)}")
+                print("-" * 55)
+
+                # Check if there are any students enrolled in the course and display the result
+                if len(students) == 0:
+                    print("No students are currently enrolled in this course.")
+                else:
+                    print("Students enrolled in this course:")
+
+                    # Loop through the list of students and print their user IDs
+                    for student in students:
+                        print(f"- Student ID: {student.get_user_ID()}")
+
+                print("=" * 55)   # End of course enrollment report
+
+                break   # Exit the loop after displaying the list of students
+        
         elif selection == "6":
             # Add your code to handle option 6
             pass
