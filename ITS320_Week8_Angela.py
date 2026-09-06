@@ -765,10 +765,36 @@ def student_menu(student):
 
                 break   # Exit the drop course loop after attempting to drop the course
 
-
+        # Logic to handle viewing the student's registered courses
         elif selection == "3":
-            # Drop a course
-            pass  # Replace with actual implementation
+            # Retrieve the courses the student is registered for
+            courses = registration_system.get_courses_for_student(student)
+
+            # Print formatted student course report
+            print("\n" + "=" * 55)
+            print("            MY COURSE REPORT")
+            print("=" * 55)
+            print(f"Student ID: {student.get_user_ID()}")
+            print("-" * 55)
+
+            # Check if the student is registered for any courses
+            if len(courses) == 0:
+                print("You are not currently registered for any courses.")   # Notify the student that they have no registered courses
+            else:
+                print("Registered Courses:")   # Display the header for the list of registered courses
+
+                # Loop through each registered course and display its details
+                for course in courses:
+                    print("-" * 55)
+                    print(f"Course ID: {course.get_course_ID()}")
+                    print(f"Course Title: {course.get_title()}")
+                    print(f"Description: {course.get_description()}")
+                    print(f"Credits: {course.get_credits()}")
+                    print(f"Capacity: {course.get_capacity()}")
+
+            # Print a closing line after listing all courses
+            print("=" * 55)
+            
         elif selection == "4":
             # View my courses
             pass  # Replace with actual implementation
