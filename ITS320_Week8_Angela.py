@@ -614,10 +614,31 @@ def admin_menu(admin):
 
                 # Exit the loop after displaying the student's course report
                 break
-            
+
+        # Option 7 logic to print all student IDs and passwords  
         elif selection == "7":
-            # Add your code to handle option 7
-            pass
+
+            # Retrieve all student credentials
+            credentials = registration_system.get_student_credentials()
+
+            # Print formatted student credential report
+            print("\n" + "=" * 55)
+            print("           STUDENT CREDENTIAL REPORT")
+            print("=" * 55)
+
+            # Check if there are no students credentials and display a message indicating this
+            if len(credentials) == 0:
+                print("No student credentials found.")
+            else:
+                # Loop through each student ID and password and print the information in a report
+                for student_ID, password in credentials:
+                    print(f"Student ID: {student_ID}")
+                    print(f"Password: {password}")
+                    print("-" * 55)
+
+            # Print a closing line after displaying all student credentials
+            print("=" * 55)
+            
         elif selection == "8":
             # Add your code to handle option 8 (View All Courses)
             all_courses = registration_system.get_all_courses()
