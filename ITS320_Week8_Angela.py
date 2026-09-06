@@ -56,7 +56,7 @@ class Student(User):
 
     # Create a method to display the student's menu options
     def display_menu(self):
-        print("      Student Menu      ")
+        print("\n      Student Menu      ")
         print("------------------------------")
         print("1. Register for a Course")
         print("2. Drop a Course")
@@ -68,7 +68,7 @@ class Student(User):
 class Admin(User):
     # Define a method to display the admin's menu options
     def display_menu(self):
-        print("      Admin Menu      ")
+        print("\n      Admin Menu      ")
         print("-----------------------------------------")
         print("1. Add a Course")
         print("2. Remove a Course")
@@ -93,19 +93,19 @@ def login():
     while True:
 
         # Prompt the user to enter their user_ID
-        user_ID = input("Please enter your user ID: ").strip()
+        user_ID = input("\nPlease enter your user ID: ").strip()
 
         # Validate if the input is empty and prompt user to re-enter their user ID
         if user_ID == "":
-            print("User ID cannot be empty. Please try again.")
+            print("\nUser ID cannot be empty. Please try again.")
             continue   # Retry the login process if the user ID is empty
 
         # Prompt the user to enter their password
-        password = input("Please enter your password: ")
+        password = input("\nPlease enter your password: ")
 
         # Validate if the password input is empty and prompt user to re-enter their password
         if password == "":
-            print("Password cannot be empty. Please try again.")
+            print("\nPassword cannot be empty. Please try again.")
             continue   # Retry the login process if the password is empty
 
         # Loop through the list of users to see if a match exists for the provided user_ID and password
@@ -116,7 +116,7 @@ def login():
                 return user  # Return the user object if credentials match
             
         # Print an error message if credentials do not match
-        print("Invalid user ID or password. Please try again.")
+        print("\nInvalid user ID or password. Please try again.")
 
 # Create a class to represent a course with attributes for course_ID, title, description, credits, and capacity
 class Course:
@@ -303,7 +303,7 @@ def admin_menu(admin):
         admin.display_menu()
 
         # Prompt the admin to enter their selection removing any leading or trailing whitespace
-        selection = input("Please enter your selection (1-9): ").strip()
+        selection = input("\nPlease enter your selection (1-9): ").strip()
 
         # Implement the admin menu options based on the selection
         # Functionality to add a course
@@ -312,16 +312,16 @@ def admin_menu(admin):
             # Use a while True loop to reprompt for correct input
             while True:
                 # Prompt the admin to enter the course ID ensuring it is not empty and removing any leading or trailing whitespace
-                course_ID = input("Enter course ID: ").strip()
+                course_ID = input("\nEnter course ID: ").strip()
 
                 # Check if the course ID is not empty
                 if course_ID == "":
-                    print("Course ID cannot be empty.")   # Notify the admin that the course ID cannot be empty
+                    print("\nCourse ID cannot be empty.")   # Notify the admin that the course ID cannot be empty
                     continue  # Reprompt the admin for the course ID if it is empty
 
                 # Conditional to check if the course ID already exists
                 if registration_system.search_course(course_ID) is not None:
-                    print("Course ID already exists.")   # Notify the admin that the course ID already exists
+                    print("\nCourse ID already exists.")   # Notify the admin that the course ID already exists
                     continue  # Reprompt the admin for the course ID if it already exists
 
                 break  # Exit the loop if the course ID is valid and does not already exist
@@ -329,40 +329,40 @@ def admin_menu(admin):
             # Reprompt for course name until valid input is provided
             while True:
                 # Prompt the admin to enter the course name ensuring it is not empty and removing any leading or trailing whitespace
-                course_name = input("Enter course name: ").strip()
+                course_name = input("\nEnter course name: ").strip()
 
                 # Check if the course name is not empty
                 if course_name != "":
                     break   # Exit the loop if the course name is not empty
-                print("Course name cannot be empty.")   # Notify the admin that the course name cannot be empty
+                print("\nCourse name cannot be empty.")   # Notify the admin that the course name cannot be empty
 
             # Reprompt for course description until valid input is provided
             while True:
                 # Prompt the admin to enter the course description ensuring it is not empty and removing any leading or trailing whitespace
-                course_description = input("Enter course description: ").strip()
+                course_description = input("\nEnter course description: ").strip()
 
                 # Check if the course description is not empty
                 if course_description != "":
                     break   # Exit the loop if the course description is not empty
-                print("Course description cannot be empty.")   # Notify the admin that the course description cannot be empty
+                print("\nCourse description cannot be empty.")   # Notify the admin that the course description cannot be empty
 
             # Reprompt for course credits and capacity until valid input is provided
             while True:
                 # Validate user input using a try/except statement
                 try:
-                    course_credits = int(input("Enter course credits: ").strip())
-                    course_capacity = int(input("Enter course capacity: ").strip())
+                    course_credits = int(input("\nEnter course credits: ").strip())
+                    course_capacity = int(input("\nEnter course capacity: ").strip())
 
                     # Conditional to ensure values entered are positive
                     if course_credits > 0 and course_capacity > 0:
                         break   # Exit the loop if valid values are entered
 
                     # Print an error message if the values are not positive
-                    print("Credits and capacity must be positive numbers.")
+                    print("\nCredits and capacity must be positive numbers.")
                 
                 # Handle the case where the user enters non-numeric values for credits or capacity
                 except ValueError:
-                    print("Invalid input. Please enter a whole, positive number for credits and capacity.")
+                    print("\nInvalid input. Please enter a whole, positive number for credits and capacity.")
 
             # Create a new Course object with the entered details
             new_course = Course(course_ID, course_name, course_description, course_credits, course_capacity)
@@ -371,19 +371,19 @@ def admin_menu(admin):
             registration_system.add_course(new_course)
 
             # Notify the admin that the course has been added successfully
-            print(f"Course {course_name} added successfully.")
+            print(f"\nCourse {course_name} added successfully.")
 
         # Functionality to remove a course
         elif selection == "2":
             # Reprompt for course ID or course name until valid input is provided
             while True:
                 # Prompt the admin to enter the course ID or course name
-                search_term = input("Enter the course ID or the course name: ").strip()
+                search_term = input("\nEnter the course ID or the course name: ").strip()
 
                 # Validate that the input is not empty
                 if search_term == "":
                     # Display an error message if the input is empty
-                    print("Course ID or course name cannot be empty.")
+                    print("\nCourse ID or course name cannot be empty.")
                     continue   # Reprompt the admin for input if the input is empty
 
                 # Search for the course using the entered search term
@@ -391,14 +391,14 @@ def admin_menu(admin):
 
                 # Conditional to check to see if the course is found
                 if course is None:
-                    print("Course not found. Please try again.")  # Notify the admin that the course was not found
+                    print("\nCourse not found. Please try again.")  # Notify the admin that the course was not found
                     continue   # Reprompt the admin for input if the course was not found
 
                 # Attempt to remove the course
                 if registration_system.remove_course(course):
-                    print(f"Course {course.get_title()} removed successfully.")  # Notify the admin that the course was removed successfully
+                    print(f"\nCourse {course.get_title()} removed successfully.")  # Notify the admin that the course was removed successfully
                 else:
-                    print("Failed to remove the course.")  # Notify the admin that the course removal failed
+                    print("\nFailed to remove the course.")  # Notify the admin that the course removal failed
                 break   # Exit the loop after attempting to remove the course
 
         # Functionality to update a course
@@ -406,12 +406,12 @@ def admin_menu(admin):
             # Reprompt for course ID or course name until valid input is provided
             while True:
                 # Prompt the admin to enter the course ID or course name
-                search_term = input("Enter the course ID or the course name to update: ").strip()
+                search_term = input("\nEnter the course ID or the course name to update: ").strip()
 
                 # Validate that the input is not empty
                 if search_term == "":
                     # Display an error message if the input is empty
-                    print("Course ID or course name cannot be empty.")
+                    print("\nCourse ID or course name cannot be empty.")
                     continue   # Reprompt the admin for input if the input is empty
 
                 # Search for the course using the entered search term
@@ -419,28 +419,28 @@ def admin_menu(admin):
 
                 # Conditional to check to see if the course is found
                 if course is None:
-                    print("Course not found. Please try again.")  # Notify the admin that the course was not found
+                    print("\nCourse not found. Please try again.")  # Notify the admin that the course was not found
                     continue   # Reprompt the admin for input if the course was not found
 
                 # Reprompt the admin to enter the new course details
                 while True:
                     # Prompt the admin to enter the new course title
-                    new_title = input("Enter the new title for the course: ").strip()
+                    new_title = input("\nEnter the new title for the course: ").strip()
 
                     # Confirm the entry is not empty
                     if new_title == "":
-                        print("Course title cannot be empty.")
+                        print("\nCourse title cannot be empty.")
                         continue   # Reprompt the admin for input if the title is empty
                     break   # Exit the loop if a valid title is entered
 
                 # Reprompt the admin to enter the new course description
                 while True:
                     # Prompt the admin to enter the new course description
-                    new_description = input("Enter the new course description: ").strip()
+                    new_description = input("\nEnter the new course description: ").strip()
 
                     # Confirm the entry is not empty
                     if new_description == "":
-                        print("Course description cannot be empty.")
+                        print("\nCourse description cannot be empty.")
                         continue   # Reprompt the admin for input if the description is empty
                     break   # Exit the loop if a valid description is entered
 
@@ -449,31 +449,31 @@ def admin_menu(admin):
                     # Use a try/except to validate input
                     try:
                         # Prompt the admin to enter the new credits and capacity values
-                        new_credits = int(input("Enter the new credits for the course: ").strip())
-                        new_capacity = int(input("Enter the new capacity for the course: ").strip())
+                        new_credits = int(input("\nEnter the new credits for the course: ").strip())
+                        new_capacity = int(input("\nEnter the new capacity for the course: ").strip())
 
                         # Conditional to validate user input 
                         if new_credits <= 0 or new_capacity <= 0:
                             # Notify the admin that the entered credits and capacity are not valid
-                            print("Credits and capacity must be positive numbers.")  
+                            print("\nCredits and capacity must be positive numbers.")  
                             continue   # Reprompt the admin for input if the credits or capacity are not valid
 
                         # Ensure the new capacity is not lower than the current number of enrolled students
                         if new_capacity < len(course.get_students()):
-                            print(f"Capacity cannot be lower than the current enrollment of {len(course.get_students())} students.")
+                            print(f"\nCapacity cannot be lower than the current enrollment of {len(course.get_students())} students.")
                             continue   # Reprompt the admin for input if the new capacity is too low
 
                         break   # Exit the loop if both credits and capacity are valid
 
                     # Notify admin of the error and reprompt for input
                     except ValueError:
-                        print("Invalid input. Please enter valid whole numbers for credits and capacity.")
+                        print("\nInvalid input. Please enter valid whole numbers for credits and capacity.")
 
                 # Update the course with the new values
                 if registration_system.update_course(course, new_title, new_description, new_credits, new_capacity):
-                    print(f"Course {course.get_title()} updated successfully.")
+                    print(f"\nCourse {course.get_title()} updated successfully.")
                 else:
-                    print("Failed to update the course.")
+                    print("\nFailed to update the course.")
                 break   # Exit the loop after updating the course
 
         # Search for a course
@@ -481,11 +481,11 @@ def admin_menu(admin):
             # Reprompt the admin to enter the course ID or title to search for
             while True:
                 # Search using user input term
-                search_term = input("Enter the course ID or course title to search for: ").strip()
+                search_term = input("\nEnter the course ID or course title to search for: ").strip()
 
                 # Conditional to ensure input is not empty
                 if search_term == "":
-                    print("Course ID or title cannot be empty.")
+                    print("\nCourse ID or title cannot be empty.")
                     continue   # Reprompt the admin for input if the search term is empty
 
                 # Search for the course using the provided search term
@@ -493,7 +493,7 @@ def admin_menu(admin):
 
                 # Handle if the course is not found
                 if course is None:
-                    print("Course not found. Please try again.")
+                    print("\nCourse not found. Please try again.")
                     continue   # Reprompt the admin for input if the course is not found
 
                 # Display the found course details
@@ -518,11 +518,11 @@ def admin_menu(admin):
             # Reprompt the admin to enter the course ID or title to search for students enrolled in that course
             while True:
                 # Search using admin input to find the course
-                search_term = input("Enter the course ID or course title to search for: ").strip()
+                search_term = input("\nEnter the course ID or course title to search for: ").strip()
 
                 # Conditional to ensure input is not empty
                 if search_term == "":
-                    print("Course ID or title cannot be empty.")
+                    print("\nCourse ID or title cannot be empty.")
                     continue   # Reprompt the admin for input if the search term is empty
 
                 # Search for the course using the provided search term
@@ -530,7 +530,7 @@ def admin_menu(admin):
 
                 # Handle if the course is not found
                 if course is None:
-                    print("Course not found. Please try again.")
+                    print("\nCourse not found. Please try again.")
                     continue   # Reprompt the admin for input if the course is not found
 
                 # Display the list of students enrolled in the course
@@ -550,9 +550,9 @@ def admin_menu(admin):
 
                 # Check if there are any students enrolled in the course and display the result
                 if len(students) == 0:
-                    print("No students are currently enrolled in this course.")
+                    print("\nNo students are currently enrolled in this course.")
                 else:
-                    print("Students enrolled in this course:")
+                    print("\nStudents enrolled in this course:")
 
                     # Loop through the list of students and print their user IDs
                     for student in students:
@@ -567,11 +567,11 @@ def admin_menu(admin):
             # Reprompt the admin for input if the student is not found
             while True:
                 # Prompt the admin to enter the student ID
-                student_ID = input("Enter the student ID: ").strip()
+                student_ID = input("\nEnter the student ID: ").strip()
 
                 # Validate that the input is not empty
                 if student_ID == "":
-                    print("Student ID cannot be empty.")   # Notify the admin that the input cannot be empty
+                    print("\nStudent ID cannot be empty.")   # Notify the admin that the input cannot be empty
                     continue   # Reprompt the admin for input if the student ID is empty
 
                 # Search for the student
@@ -591,7 +591,7 @@ def admin_menu(admin):
 
                 # Handle if the student is not found
                 if student is None:
-                    print("Student not found. Please try again.")
+                    print("\nStudent not found. Please try again.")
                     continue  # Reprompt the admin for input if the student is not found
 
                 # Get the courses the student is registered for
@@ -606,9 +606,9 @@ def admin_menu(admin):
 
                 # Check if the student is registered for any courses and print the appropriate message
                 if len(courses) == 0:
-                    print("This student is not currently registered for any courses.")
+                    print("\nThis student is not currently registered for any courses.")
                 else:
-                    print("Registered Courses:")
+                    print("\nRegistered Courses:")
 
                     # Loop through each course the student is registered in and print its details
                     for course in courses:
@@ -638,7 +638,7 @@ def admin_menu(admin):
 
             # Check if there are no students credentials and display a message if there are none
             if len(credentials) == 0:
-                print("No student credentials found.")
+                print("\nNo student credentials found.")
             else:
                 # Loop through each student ID and password and print the information in a report
                 for student_ID, password in credentials:
@@ -661,7 +661,7 @@ def admin_menu(admin):
 
             # Check if there are no courses in the registration system and display a message to this effect
             if len(all_courses) == 0:
-                print("No courses are currently available.")
+                print("\nNo courses are currently available.")
             else:
                 # Loop through each course and display its details
                 for course in all_courses:
@@ -688,11 +688,11 @@ def admin_menu(admin):
         # Handle logging out if the admin selects 9
         elif selection == "9":
             # Display a logout message
-            print("Logging out... Goodbye!")
+            print("\nLogging out... Goodbye!")
             break  # Exit the admin menu loop
         else:
             # Handle invalid menu selection
-            print("Invalid selection. Please try again.")
+            print("\nInvalid selection. Please try again.")
 
 # Method to handle the student menu options
 def student_menu(student):
@@ -702,18 +702,18 @@ def student_menu(student):
         student.display_menu()
 
         # Prompt the student to enter a menu selection removing leading and trailing whitespace
-        selection = input("Please enter your selection (1-5): ").strip()
+        selection = input("\nPlease enter your selection (1-5): ").strip()
 
         # Handle registering for a course
         if selection == "1":
             # Reprompt until the student enters a valid course
             while True:
                 # Prompt the student to enter the course ID or the course name removing any leading and trailing whitespace
-                search_term = input("Enter the course ID or course title to register for: ").strip()
+                search_term = input("\nEnter the course ID or course title to register for: ").strip()
 
                 # Validate the input to ensure it is not empty
                 if search_term == "":
-                    print("Course ID or title cannot be empty. Please try again.")  # Notify the student of invalid input
+                    print("\nCourse ID or title cannot be empty. Please try again.")  # Notify the student of invalid input
                     continue  # Reprompt the student for a valid course
 
                 # Search for the course
@@ -721,24 +721,24 @@ def student_menu(student):
 
                 # Check to see if the course is found
                 if course is None:
-                    print("Course not found. Please try again.")  # Notify the student that the course was not found
+                    print("\nCourse not found. Please try again.")  # Notify the student that the course was not found
                     continue  # Reprompt the student for a valid course
 
                 # Check to see if the student is already enrolled in the course
                 if course in student.get_courses():
-                    print("You are already enrolled in this course.")  # Notify the student that they are already enrolled
+                    print("\nYou are already enrolled in this course.")  # Notify the student that they are already enrolled
                     break  # Exit the registration loop if the student is already enrolled in the course
 
                 # Check to see if the course is full
                 if len(course.get_students()) >= course.get_capacity():
-                    print("This course is full. Registration cannot be completed.")  # Notify the student that the course is full
+                    print("\nThis course is full. Registration cannot be completed.")  # Notify the student that the course is full
                     break  # Exit the registration loop if the course is full
 
                 # Attempt to register the student for the course
                 if registration_system.register_student(course, student):
-                    print(f"You have successfully registered for the course: {course.get_title()}")  # Notify the student of successful registration
+                    print(f"\nYou have successfully registered for the course: {course.get_title()}")  # Notify the student of successful registration
                 else:
-                    print("Registration failed.")  # Notify the student if registration was unsuccessful
+                    print("\nRegistration failed.")  # Notify the student if registration was unsuccessful
 
                 break  # Exit the registration loop after attempting to register for a course
 
@@ -747,11 +747,11 @@ def student_menu(student):
             # Reprompt until the student enters a valid course
             while True:
                 # Prompt the student to enter the course ID or course title
-                search_term = input("Enter the course ID or course title to drop: ").strip()
+                search_term = input("\nEnter the course ID or course title to drop: ").strip()
 
                 # Validate that the input is not empty
                 if search_term == "":
-                    print("Course ID or title cannot be empty. Please try again.")  # Notify the student that the input cannot be empty
+                    print("\nCourse ID or title cannot be empty. Please try again.")  # Notify the student that the input cannot be empty
                     continue   # Reprompt the student for a valid course ID or title
 
                 # Search for the course
@@ -759,19 +759,19 @@ def student_menu(student):
 
                 # Check to see if the course is found
                 if course is None:
-                    print("Course not found. Please try again.")  # Notify the student if the course cannot be found
+                    print("\nCourse not found. Please try again.")  # Notify the student if the course cannot be found
                     continue  # Reprompt the student for a valid course ID or title
 
                 # Check if the student is registered for the course
                 if course not in student.get_courses():
-                    print("You are not currently enrolled in this course.")  # Notify the student that they cannot drop a course they are not enrolled in
+                    print("\nYou are not currently enrolled in this course.")  # Notify the student that they cannot drop a course they are not enrolled in
                     break   # Exit the drop course loop if the student is not enrolled in the course
 
                 # Attempt to drop the course
                 if registration_system.drop_course(course, student):
-                    print(f"You have successfully dropped the course: {course.get_title()}")  # Notify the student that the course has been successfully dropped
+                    print(f"\nYou have successfully dropped the course: {course.get_title()}")  # Notify the student that the course has been successfully dropped
                 else:
-                    print("Course drop failed.")  # Display a message if the course could not be dropped
+                    print("\nCourse drop failed.")  # Display a message if the course could not be dropped
 
                 break   # Exit the drop course loop after attempting to drop the course
 
@@ -789,9 +789,9 @@ def student_menu(student):
 
             # Check if the student is registered for any courses
             if len(courses) == 0:
-                print("You are not currently registered for any courses.")   # Notify the student that they have no registered courses
+                print("\nYou are not currently registered for any courses.")   # Notify the student that they have no registered courses
             else:
-                print("Registered Courses:")   # Display the header for the list of registered courses
+                print("\nRegistered Courses:")   # Display the header for the list of registered courses
 
                 # Loop through each registered course and display its details
                 for course in courses:
@@ -817,7 +817,7 @@ def student_menu(student):
 
             # Check if there are no courses in the registration system
             if len(all_courses) == 0:
-                print("No courses are currently available.")  # Notify the user that there are no courses available in the system
+                print("\nNo courses are currently available.")  # Notify the user that there are no courses available in the system
             else:
                 # Loop through each course and display its details
                 for course in all_courses:
@@ -844,15 +844,14 @@ def student_menu(student):
         # Logic to handle student logout
         elif selection == "5":
             # Display logging out message
-            print("Logging out... Goodbye!")
+            print("\nLogging out... Goodbye!")
             break  # Exit the student menu loop
         else:
             # Handle invalid menu selection
-            print("Invalid selection. Please try again.")
+            print("\nInvalid selection. Please try again.")
 
 # Main program loop
-while True:
-    # Prompt the user to log in
+    # Main program loop starts here
     current_user = login()
 
     # Direct the user to the appropriate menu based on their role
