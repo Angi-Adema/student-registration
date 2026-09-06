@@ -220,7 +220,7 @@ class RegistrationSystem:
     def remove_course(self, course):
         # Check if the course exists in the registration system before attempting removal
         if course in self.__courses:
-            # Remove the course from each enrolled student's course list
+            # Remove the course from the enrolled student's course list
             for student in course.get_students():
                 student.drop_course(course)  # Remove the course from the student's list of courses
 
@@ -864,7 +864,7 @@ while True:
         print("\nSelection cannot be empty. Please try again.")  # Inform the user that the selection cannot be empty
         continue   # Skip the rest of the loop and prompt the user again
 
-    # Process the user's menu selection
+    # Process the user's menu selection - General menu
     if selection == "1":
         # Call the login function to authenticate the user
         current_user = login()
@@ -891,8 +891,12 @@ while True:
 #    https://docs.python.org/3/library/abc.html
 # 4. Python Software Foundation. (2026). "Errors and Exceptions" Python Documentation.
 #    https://docs.python.org/3/tutorial/errors.html
-# 5. GeeksforGeeks. (2026, June 8). "Python OOP Concepts"
+# 5. Python Guides. (n.d.). "Object oriented programming in Python"
+#    https://pythonguides.com/object-oriented-programming/
+# 6. GeeksforGeeks. (2026, June 8). "Python OOP Concepts"
 #    https://www.geeksforgeeks.org/python/python-oops-concepts/
-# 6. Miller, B. (n.d.). "Programming in Python 3" zyBooks, a Wiley Brand.
+# 7. GeeksforGeeks. (2026, May 8). "Python List methods"
+#    https://www.geeksforgeeks.org/python/list-methods-python/
+# 8. Miller, B. (n.d.). "Programming in Python 3" zyBooks, a Wiley Brand.
 #    Canvas https://www.zybooks.com/
 
