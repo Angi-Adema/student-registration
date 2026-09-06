@@ -453,9 +453,9 @@ def admin_menu(admin):
                         new_capacity = int(input("\nEnter the new capacity for the course: ").strip())
 
                         # Conditional to validate user input is within the correct range and value 
-                        if 1 <= new_credits <= 3 and 1 <= new_capacity <= 100:
+                        if not (1 <= new_credits <= 3 and 1 <= new_capacity <= 100):
                             # Notify the admin that the entered credits and capacity are not valid
-                            print("\nCredits and capacity must be positive numbers.")  
+                            print("\nCredits must be between 1 and 3, and capacity must be between 1 and 100.")  
                             continue   # Reprompt the admin for input if the credits or capacity are not valid
 
                         # Ensure the new capacity is not lower than the current number of enrolled students
