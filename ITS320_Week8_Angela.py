@@ -443,15 +443,27 @@ def admin_menu(admin):
                         new_capacity = int(input("Enter the new capacity for the course: ").strip())
 
                         # Conditional to validate user input 
-                        if new_credits > 0 and new_capacity > 0:
-                            break   # Exit the loop if both credits and capacity are valid
+                        if new_credits <= 0 or new_capacity <= 0:
+                            # Notify the admin that the entered credits and capacity are not valid
+                            print("Credits and capacity must be positive numbers.")  
+                            continue   # Reprompt the admin for input if the credits or capacity are not valid
 
-                        # Notify the admin that the entered credits and capacity are not valid
-                        print("Credits and capacity must be positive numbers.")  
+                        # Ensure the new capacity is not lower than the current number of enrolled students
+                        if new_capacity < len(course.get_students()):
+                            print(f"Capacity cannot be lower than the current enrollment of {len(course.get_students())} students.")
+                            continue   # Reprompt the admin for input if the new capacity is too low
+
+                        break   # Exit the loop if both credits and capacity are valid
 
                     # Notify admin of the error and reprompt for input
                     except ValueError:
-                        print("Invalid input. Please enter valid numbers for credits and capacity.")
+                        print("Invalid input. Please enter valid whole numbers for credits and capacity.")
+
+            # Update the course with the new values
+            if registration_system.update_course(course, new_title, new_description, new_credits, new_capacity):
+                print(f"Course {course.get_title()} updated successfully.")
+            else:
+                print("Failed to update the course.")
 
 
         elif selection == "4":
