@@ -551,10 +551,70 @@ def admin_menu(admin):
                 print("=" * 55)   # End of course enrollment report
 
                 break   # Exit the loop after displaying the list of students
-        
+
+        # Selection to handle viewing a student's course report
         elif selection == "6":
-            # Add your code to handle option 6
-            pass
+            # Reprompt the admin for input if the student is not found
+            while True:
+                # Prompt the admin to enter the student ID
+                student_ID = input("Enter the student ID: ").strip()
+
+                # Validate that the input is not empty
+                if student_ID == "":
+                    print("Student ID cannot be empty.")   # Notify the admin that the input cannot be empty
+                    continue   # Reprompt the admin for input if the student ID is empty
+
+                # Search for the student
+                student = None
+
+                # Loop through the list of users to find the student with the matching ID
+                for user in users:
+                    # Check if the current user is a student and if their ID matches the input student ID using .strip() and .lower() making data consistent
+                    if (
+                        user.get_role().strip().lower() == "student"
+                        and user.get_user_ID().strip().lower() == student_ID.lower()
+                    ):
+                        # Assign the found user to the student variable
+                        student = user
+                        # Exit the loop once the student is found
+                        break
+
+                # Handle if the student is not found
+                if student is None:
+                    print("Student not found. Please try again.")
+                    continue  # Reprompt the admin for input if the student is not found
+
+                # Get the courses the student is registered for
+                courses = registration_system.get_courses_for_student(student)
+
+                # Print formatted student course report
+                print("\n" + "=" * 55)
+                print("            STUDENT COURSE REPORT")
+                print("=" * 55)
+                print(f"Student ID: {student.get_user_ID()}")
+                print("-" * 50)
+
+                # Check if the student is registered for any courses and print the appropriate message
+                if len(courses) == 0:
+                    print("This student is not currently registered for any courses.")
+                else:
+                    print("Registered Courses:")
+
+                    # Loop through each course the student is registered in and print its details
+                    for course in courses:
+                        print("-" * 50)
+                        print(f"Course ID: {course.get_course_ID()}")
+                        print(f"Course Title: {course.get_title()}")
+                        print(f"Description: {course.get_description()}")
+                        print(f"Credits: {course.get_credits()}")
+                        print(f"Capacity: {course.get_capacity()}")
+
+                # Print a closing line after listing all courses
+                print("=" * 55)
+
+                # Exit the loop after displaying the student's course report
+                break
+            
         elif selection == "7":
             # Add your code to handle option 7
             pass
