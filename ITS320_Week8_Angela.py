@@ -675,11 +675,13 @@ def admin_menu(admin):
             # Print a closing line after displaying all courses
             print("=" * 55)
 
-
+        # Handle logging out if the admin selects 9
         elif selection == "9":
-            # Logout option
-            break
+            # Display a logout message
+            print("Logging out... Goodbye!")
+            break  # Exit the admin menu loop
         else:
+            # Handle invalid menu selection
             print("Invalid selection. Please try again.")
     
     
