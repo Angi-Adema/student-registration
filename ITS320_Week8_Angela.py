@@ -851,19 +851,13 @@ def student_menu(student):
             print("\nInvalid selection. Please try again.")
 
 # Main program
-    # Main program starts here
-    current_user = login()
+# Prompt the user to log in
+current_user = login()
 
-    # Direct the user to the appropriate menu based on their role
-    if current_user.get_role().strip().lower() == "admin":
-        admin_menu(current_user)
-    else:
-        student_menu(current_user)
-    
-    
-    
-    
-    
-    
+# Direct the user to the appropriate menu based on their role
+if current_user.get_role().strip().lower() == "admin":
+    admin_menu(current_user)
+else:
+    student_menu(current_user)
 
 
