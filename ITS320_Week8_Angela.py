@@ -638,12 +638,44 @@ def admin_menu(admin):
 
             # Print a closing line after displaying all student credentials
             print("=" * 55)
-            
+
+        # Print a report showing all university courses available   
         elif selection == "8":
-            # Add your code to handle option 8 (View All Courses)
+            # Retrieve all courses from the registration system
             all_courses = registration_system.get_all_courses()
-            for course in all_courses:
-                print(course)
+
+            # Print formatted all courses report
+            print("\n" + "=" * 55)
+            print("                ALL COURSES REPORT")
+            print("=" * 55)
+
+            # Check if there are no courses in the registration system and display a message to this effect
+            if len(all_courses) == 0:
+                print("No courses are currently available.")
+            else:
+                # Loop through each course and display its details
+                for course in all_courses:
+
+                    # Determine whether the course is full
+                    if len(course.get_students()) >= course.get_capacity():
+                        status = "Full"
+                    else:
+                        status = "Not Full"
+
+                    # Print the course information
+                    print(f"Course ID: {course.get_course_ID()}")
+                    print(f"Course Title: {course.get_title()}")
+                    print(f"Description: {course.get_description()}")
+                    print(f"Credits: {course.get_credits()}")
+                    print(f"Capacity: {course.get_capacity()}")
+                    print(f"Current Enrollment: {len(course.get_students())}")
+                    print(f"Status: {status}")
+                    print("-" * 55)
+
+            # Print a closing line after displaying all courses
+            print("=" * 55)
+
+
         elif selection == "9":
             # Logout option
             break
