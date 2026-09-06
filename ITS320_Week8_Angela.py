@@ -459,11 +459,12 @@ def admin_menu(admin):
                     except ValueError:
                         print("Invalid input. Please enter valid whole numbers for credits and capacity.")
 
-            # Update the course with the new values
-            if registration_system.update_course(course, new_title, new_description, new_credits, new_capacity):
-                print(f"Course {course.get_title()} updated successfully.")
-            else:
-                print("Failed to update the course.")
+                # Update the course with the new values
+                if registration_system.update_course(course, new_title, new_description, new_credits, new_capacity):
+                    print(f"Course {course.get_title()} updated successfully.")
+                else:
+                    print("Failed to update the course.")
+                break   # Exit the loop after updating the course
 
 
         elif selection == "4":
