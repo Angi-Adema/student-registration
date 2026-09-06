@@ -353,8 +353,8 @@ def admin_menu(admin):
                     course_credits = int(input("\nEnter course credits: ").strip())
                     course_capacity = int(input("\nEnter course capacity: ").strip())
 
-                    # Conditional to ensure values entered are positive
-                    if course_credits > 0 and course_capacity > 0:
+                    # Conditional to ensure a valid course credit range as well as a positive capacity value
+                    if 1 <= course_credits <= 3 and 1 <= course_capacity <= 100:
                         break   # Exit the loop if valid values are entered
 
                     # Print an error message if the values are not positive
@@ -452,8 +452,8 @@ def admin_menu(admin):
                         new_credits = int(input("\nEnter the new credits for the course: ").strip())
                         new_capacity = int(input("\nEnter the new capacity for the course: ").strip())
 
-                        # Conditional to validate user input 
-                        if new_credits <= 0 or new_capacity <= 0:
+                        # Conditional to validate user input is within the correct range and value 
+                        if 1 <= course_credits <= 3 and 1 <= course_capacity <= 100:
                             # Notify the admin that the entered credits and capacity are not valid
                             print("\nCredits and capacity must be positive numbers.")  
                             continue   # Reprompt the admin for input if the credits or capacity are not valid
