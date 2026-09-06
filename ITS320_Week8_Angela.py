@@ -592,7 +592,7 @@ def admin_menu(admin):
                 print("            STUDENT COURSE REPORT")
                 print("=" * 55)
                 print(f"Student ID: {student.get_user_ID()}")
-                print("-" * 50)
+                print("-" * 55)
 
                 # Check if the student is registered for any courses and print the appropriate message
                 if len(courses) == 0:
@@ -602,7 +602,7 @@ def admin_menu(admin):
 
                     # Loop through each course the student is registered in and print its details
                     for course in courses:
-                        print("-" * 50)
+                        print("-" * 55)
                         print(f"Course ID: {course.get_course_ID()}")
                         print(f"Course Title: {course.get_title()}")
                         print(f"Description: {course.get_description()}")
