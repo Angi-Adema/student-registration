@@ -850,8 +850,8 @@ def student_menu(student):
             # Handle invalid menu selection
             print("\nInvalid selection. Please try again.")
 
-# Main program loop
-    # Main program loop starts here
+# Main program
+    # Main program starts here
     current_user = login()
 
     # Direct the user to the appropriate menu based on their role
