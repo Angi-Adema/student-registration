@@ -293,7 +293,7 @@ def admin_menu(admin):
         admin.display_menu()
 
         # Prompt the admin to enter their selection removing any leading or trailing whitespace
-        selection = input("Please enter your selection: ").strip()
+        selection = input("Please enter your selection (1-9): ").strip()
 
         # Implement the admin menu options based on the selection
         # Functionality to add a course
@@ -680,6 +680,102 @@ def admin_menu(admin):
             # Display a logout message
             print("Logging out... Goodbye!")
             break  # Exit the admin menu loop
+        else:
+            # Handle invalid menu selection
+            print("Invalid selection. Please try again.")
+
+# Method to handle the student menu options
+def student_menu(student):
+    # Reprompt the student for menu selection until they choose to log out
+    while True:
+        # Display the student menu 
+        student.display_menu()
+
+        # Prompt the student to enter a menu selection removing leading and trailing whitespace
+        selection = input("Please enter your selection (1-5): ").strip()
+
+        # Handle registering for a course
+        if selection == "1":
+            # Reprompt until the student enters a valid course
+            while True:
+                # Prompt the student to enter the course ID or the course name removing any leading and trailing whitespace
+                search_term = input("Enter the course ID or course title to register for: ").strip()
+
+                # Validate the input to ensure it is not empty
+                if search_term == "":
+                    print("Course ID or title cannot be empty. Please try again.")  # Notify the student of invalid input
+                    continue  # Reprompt the student for a valid course
+
+                # Search for the course
+                course = registration_system.search_course(search_term)
+
+                # Check to see if the course is found
+                if course is None:
+                    print("Course not found. Please try again.")  # Notify the student that the course was not found
+                    continue  # Reprompt the student for a valid course
+
+                # Check to see if the student is already enrolled in the course
+                if course in student.get_courses():
+                    print("You are already enrolled in this course.")  # Notify the student that they are already enrolled
+                    break  # Exit the registration loop if the student is already enrolled in the course
+
+                # Check to see if the course is full
+                if len(course.get_students()) >= course.get_capacity():
+                    print("This course is full. Registration cannot be completed.")  # Notify the student that the course is full
+                    break  # Exit the registration loop if the course is full
+
+                # Attempt to register the student for the course
+                if registration_system.register_student(course, student):
+                    print(f"You have successfully registered for the course: {course.get_title()}")  # Notify the student of successful registration
+                else:
+                    print("Registration failed.")  # Notify the student if registration was unsuccessful
+
+                break  # Exit the registration loop after attempting to register for a course
+
+        # Logic to handle the student dropping a course    
+        elif selection == "2":
+            # Reprompt until the student enters a valid course
+            while True:
+                # Prompt the student to enter the course ID or course title
+                search_term = input("Enter the course ID or course title to drop: ").strip()
+
+                # Validate that the input is not empty
+                if search_term == "":
+                    print("Course ID or title cannot be empty. Please try again.")  # Notify the student that the input cannot be empty
+                    continue   # Reprompt the student for a valid course ID or title
+
+                # Search for the course
+                course = registration_system.search_course(search_term)
+
+                # Check to see if the course is found
+                if course is None:
+                    print("Course not found. Please try again.")  # Notify the student if the course cannot be found
+                    continue  # Reprompt the student for a valid course ID or title
+
+                # Check if the student is registered for the course
+                if course not in student.get_courses():
+                    print("You are not currently enrolled in this course.")  # Notify the student that they cannot drop a course they are not enrolled in
+                    break   # Exit the drop course loop if the student is not enrolled in the course
+
+                # Attempt to drop the course
+                if registration_system.drop_course(course, student):
+                    print(f"You have successfully dropped the course: {course.get_title()}")  # Notify the student that the course has been successfully dropped
+                else:
+                    print("Course drop failed.")  # Display a message if the course could not be dropped
+
+                break   # Exit the drop course loop after attempting to drop the course
+
+
+        elif selection == "3":
+            # Drop a course
+            pass  # Replace with actual implementation
+        elif selection == "4":
+            # View my courses
+            pass  # Replace with actual implementation
+        elif selection == "5":
+            # Logout
+            print("Logging out... Goodbye!")
+            break  # Exit the student menu loop
         else:
             # Handle invalid menu selection
             print("Invalid selection. Please try again.")
