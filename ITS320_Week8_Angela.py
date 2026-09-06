@@ -289,7 +289,6 @@ def admin_menu(admin):
 
     # Implement a while True loop to reprompt the user until they exit the system
     while True:
-
         # Call display_menu to display the admin menu options
         admin.display_menu()
 
@@ -302,7 +301,6 @@ def admin_menu(admin):
 
             # Use a while True loop to reprompt for correct input
             while True:
-
                 # Prompt the admin to enter the course ID ensuring it is not empty and removing any leading or trailing whitespace
                 course_ID = input("Enter course ID: ").strip()
 
@@ -320,7 +318,6 @@ def admin_menu(admin):
 
             # Reprompt for course name until valid input is provided
             while True:
-
                 # Prompt the admin to enter the course name ensuring it is not empty and removing any leading or trailing whitespace
                 course_name = input("Enter course name: ").strip()
 
@@ -331,7 +328,6 @@ def admin_menu(admin):
 
             # Reprompt for course description until valid input is provided
             while True:
-
                 # Prompt the admin to enter the course description ensuring it is not empty and removing any leading or trailing whitespace
                 course_description = input("Enter course description: ").strip()
 
@@ -342,7 +338,6 @@ def admin_menu(admin):
 
             # Reprompt for course credits and capacity until valid input is provided
             while True:
-
                 # Validate user input using a try/except statement
                 try:
                     course_credits = int(input("Enter course credits: ").strip())
@@ -368,12 +363,97 @@ def admin_menu(admin):
             # Notify the admin that the course has been added successfully
             print(f"Course {course_name} added successfully.")
 
+        # Functionality to remove a course
         elif selection == "2":
-            # Add your code to handle option 2
-            pass
+            # Reprompt for course ID or course name until valid input is provided
+            while True:
+                # Prompt the admin to enter the course ID or course name
+                search_term = input("Enter the course ID or the course name: ").strip()
+
+                # Validate that the input is not empty
+                if search_term == "":
+                    # Display an error message if the input is empty
+                    print("Course ID or course name cannot be empty.")
+                    continue   # Reprompt the admin for input if the input is empty
+
+                # Search for the course using the entered search term
+                course = registration_system.search_course(search_term)
+
+                # Conditional to check to see if the course is found
+                if course is None:
+                    print("Course not found. Please try again.")  # Notify the admin that the course was not found
+                    continue   # Reprompt the admin for input if the course was not found
+
+                # Attempt to remove the course
+                if registration_system.remove_course(course):
+                    print(f"Course {course.get_title()} removed successfully.")  # Notify the admin that the course was removed successfully
+                else:
+                    print("Failed to remove the course.")  # Notify the admin that the course removal failed
+                break   # Exit the loop after attempting to remove the course
+
+        # Functionality to update a course
         elif selection == "3":
-            # Add your code to handle option 3
-            pass
+            # Reprompt for course ID or course name until valid input is provided
+            while True:
+                # Prompt the admin to enter the course ID or course name
+                search_term = input("Enter the course ID or the course name to update: ").strip()
+
+                # Validate that the input is not empty
+                if search_term == "":
+                    # Display an error message if the input is empty
+                    print("Course ID or course name cannot be empty.")
+                    continue   # Reprompt the admin for input if the input is empty
+
+                # Search for the course using the entered search term
+                course = registration_system.search_course(search_term)
+
+                # Conditional to check to see if the course is found
+                if course is None:
+                    print("Course not found. Please try again.")  # Notify the admin that the course was not found
+                    continue   # Reprompt the admin for input if the course was not found
+
+                # Reprompt the admin to enter the new course details
+                while True:
+                    # Prompt the admin to enter the new course title
+                    new_title = input("Enter the new title for the course: ").strip()
+
+                    # Confirm the entry is not empty
+                    if new_title == "":
+                        print("Course title cannot be empty.")
+                        continue   # Reprompt the admin for input if the title is empty
+                    break   # Exit the loop if a valid title is entered
+
+                # Reprompt the admin to enter the new course description
+                while True:
+                    # Prompt the admin to enter the new course description
+                    new_description = input("Enter the new course description: ").strip()
+
+                    # Confirm the entry is not empty
+                    if new_description == "":
+                        print("Course description cannot be empty.")
+                        continue   # Reprompt the admin for input if the description is empty
+                    break   # Exit the loop if a valid description is entered
+
+                # Reprompt the admin to input new credits value
+                while True:
+                    # Use a try/except to validate input
+                    try:
+                        # Prompt the admin to enter the new credits and capacity values
+                        new_credits = int(input("Enter the new credits for the course: ").strip())
+                        new_capacity = int(input("Enter the new capacity for the course: ").strip())
+
+                        # Conditional to validate user input 
+                        if new_credits > 0 and new_capacity > 0:
+                            break   # Exit the loop if both credits and capacity are valid
+
+                        # Notify the admin that the entered credits and capacity are not valid
+                        print("Credits and capacity must be positive numbers.")  
+
+                    # Notify admin of the error and reprompt for input
+                    except ValueError:
+                        print("Invalid input. Please enter valid numbers for credits and capacity.")
+
+
         elif selection == "4":
             # Add your code to handle option 4
             pass
