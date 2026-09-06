@@ -95,8 +95,18 @@ def login():
         # Prompt the user to enter their user_ID
         user_ID = input("Please enter your user ID: ").strip()
 
+        # Validate if the input is empty and prompt user to re-enter their user ID
+        if user_ID == "":
+            print("User ID cannot be empty. Please try again.")
+            continue   # Retry the login process if the user ID is empty
+
         # Prompt the user to enter their password
         password = input("Please enter your password: ")
+
+        # Validate if the password input is empty and prompt user to re-enter their password
+        if password == "":
+            print("Password cannot be empty. Please try again.")
+            continue   # Retry the login process if the password is empty
 
         # Loop through the list of users to see if a match exists for the provided user_ID and password
         for user in users:
