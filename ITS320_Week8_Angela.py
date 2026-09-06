@@ -882,4 +882,17 @@ while True:
     else:
         print("\nInvalid selection. Please try again.")   # Handle invalid main menu selection
 
+# REFERENCES
+# 1. Python Software Foundation. (2026). "Classes" Python Documentation. 
+#    https://docs.python.org/3/tutorial/classes.html
+# 2. Python Software Foundation. (2026). "More control flow tools" Python Documentation.
+#    https://docs.python.org/3/tutorial/controlflow.html
+# 3. Python Software Foundation. (2026). "abc - Abstract base classes" Python Documentation.
+#    https://docs.python.org/3/library/abc.html
+# 4. Python Software Foundation. (2026). "Errors and Exceptions" Python Documentation.
+#    https://docs.python.org/3/tutorial/errors.html
+# 5. GeeksforGeeks. (2026, June 8). "Python OOP Concepts"
+#    https://www.geeksforgeeks.org/python/python-oops-concepts/
+# 6. Miller, B. (n.d.). "Programming in Python 3" zyBooks, a Wiley Brand.
+#    Canvas https://www.zybooks.com/
 
